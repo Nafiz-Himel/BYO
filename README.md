@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AETHER — Luxury Clothing
 
-## Getting Started
+**Modern E-commerce Platform for Premium Fashion**
 
-First, run the development server:
+![AETHER](https://byo-lyart.vercel.app/og-image.png) 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+**Live Demo:** [byo-lyart.vercel.app](https://byo-lyart.vercel.app/)
+
+## 🌟 Overview
+
+**AETHER** is a sleek, high-end luxury clothing e-commerce website built with **Next.js 15 (App Router)**. It delivers a premium shopping experience with elegant design, smooth animations, dark/light mode, and a powerful command palette — inspired by contemporary luxury fashion brands.
+
+## ✨ Features
+
+- **Modern & Responsive Design** — Clean, minimalist luxury aesthetic
+- **Dark/Light Mode** — Elegant theme switching
+- **Command Palette** — Lightning-fast navigation (⌘ + K)
+- **Product Collections** — Browse by categories with smooth filtering
+- **Optimized Performance** — Built with Next.js 15, TypeScript & Tailwind CSS
+- **SEO Friendly** — Metadata, Open Graph, and structured data ready
+- **Fast & Smooth UX** — Framer Motion animations + optimized images
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **UI Components:** Custom + shadcn/ui
+- **Font:** Geist (Vercel)
+- **Deployment:** Vercel
+- **Package Manager:** pnpm
+
+📁 Project Structure
+```
+BYO/
+├── src/
+│   ├── app/              # App Router pages & layouts
+│   ├── components/       # Reusable UI components
+│   └── lib/              # Utilities & data
+├── public/               # Static assets
+├── styles/               # Global styles
+└── components.json       # shadcn/ui config
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Prerequisites
 
-## Learn More
+- Node.js (v18+)
+- pnpm
 
-To learn more about Next.js, take a look at the following resources:
+### Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Clone the repository
+git clone https://github.com/Nafiz-Himel/BYO.git
+cd BYO
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Install dependencies
+pnpm install
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Run development server
+pnpm dev
