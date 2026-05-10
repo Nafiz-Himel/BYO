@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react"
 import { CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
@@ -11,6 +12,9 @@ interface CheckoutSuccessDialogProps {
 }
 
 export function CheckoutSuccessDialog({ open, onOpenChange, onContinueShopping }: CheckoutSuccessDialogProps) {
+  const [orderNumber] = React.useState(() =>
+    Math.random().toString(36).substr(2, 9).toUpperCase()
+  )
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md text-center">
@@ -27,7 +31,7 @@ export function CheckoutSuccessDialog({ open, onOpenChange, onContinueShopping }
 
         <div className="mt-6 p-4 rounded-xl bg-muted">
           <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Order Number</p>
-          <p className="font-mono text-lg">#AETH-{Math.random().toString(36).substr(2, 9).toUpperCase()}</p>
+          <p className="font-mono text-lg">#AETH-{orderNumber}</p>
         </div>
 
         <div className="mt-6 space-y-3">

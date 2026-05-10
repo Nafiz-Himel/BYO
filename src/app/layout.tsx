@@ -6,9 +6,10 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { CartProvider } from "@/lib/cart-context"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const _geistSans = Geist({ subsets: ["latin"], variable: "--font-sans" })
+const _geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
 const _playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" })
+
 
 export const metadata: Metadata = {
   title: "AETHER | Luxury Clothing",
@@ -51,7 +52,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans antialiased ${_playfair.variable}`}>
+      <body className={`font-sans antialiased ${_geistSans.variable} ${_geistMono.variable} ${_playfair.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <CartProvider>{children}</CartProvider>
         </ThemeProvider>

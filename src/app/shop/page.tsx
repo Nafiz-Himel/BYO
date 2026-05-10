@@ -29,13 +29,6 @@ export default function ShopPage() {
     return () => clearTimeout(timer)
   }, [])
 
-  useEffect(() => {
-    const categoryParam = searchParams.get("category")
-    if (categoryParam) {
-      setSelectedCategory(categoryParam)
-    }
-  }, [searchParams])
-
   const filteredProducts = useMemo(() => {
     let filtered = [...products]
 
