@@ -9,6 +9,7 @@ const ProductSchema = new Schema({
   images: [{ type: String }],
   category: { type: Schema.Types.ObjectId, ref: "Category" },
   sizes: [{ type: String }],
+  featured: { type: Boolean, default: false },
   isNew: { type: Boolean, default: false },
   details: { type: String },
   sizingGuide: { type: String },
