@@ -1,5 +1,6 @@
 "use client"
 
+import { useOptimistic } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Minus, Plus, X } from "lucide-react"
@@ -15,11 +16,20 @@ interface CartItemRowProps {
 export function CartItemRow({ item, onUpdateQuantity, onRemove }: CartItemRowProps) {
   const { product, quantity, size } = item
 
+  const [optimisticQty, setOptimisticQty] = useOptimistic(quantity)
+
+  const handleUpdateQuantity = (newQty: number) => {
+    setOptimisticQty(newQty)
+    onUpdateQuantity(product.id, size, newQty)
+  }
+
+  const displayQty = optimisticQty
+
   return (
     <div className="flex gap-4 py-6 border-b border-border/40">
       {/* Product Image */}
       <Link
-        href={`/shop/${product.slug}`}
+        href={`/products/${product.slug}`}
         className="relative w-24 h-32 flex-shrink-0 overflow-hidden rounded-lg bg-muted"
       >
         <Image
@@ -36,7 +46,7 @@ export function CartItemRow({ item, onUpdateQuantity, onRemove }: CartItemRowPro
         <div className="flex justify-between gap-4">
           <div>
             <Link
-              href={`/shop/${product.slug}`}
+              href={`/products/${product.slug}`}
               className="font-medium text-sm hover:text-accent transition-colors line-clamp-2"
             >
               {product.name}
@@ -61,18 +71,18 @@ export function CartItemRow({ item, onUpdateQuantity, onRemove }: CartItemRowPro
               variant="outline"
               size="icon"
               className="h-8 w-8 rounded-md bg-transparent"
-              onClick={() => onUpdateQuantity(product.id, size, quantity - 1)}
-              disabled={quantity <= 1}
+              onClick={() => handleUpdateQuantity(displayQty - 1)}
+              disabled={displayQty <= 1}
               aria-label="Decrease quantity"
             >
               <Minus className="h-3 w-3" />
             </Button>
-            <div className="w-10 h-8 flex items-center justify-center text-sm">{quantity}</div>
+            <div className="w-10 h-8 flex items-center justify-center text-sm">{displayQty}</div>
             <Button
               variant="outline"
               size="icon"
               className="h-8 w-8 rounded-md bg-transparent"
-              onClick={() => onUpdateQuantity(product.id, size, quantity + 1)}
+              onClick={() => handleUpdateQuantity(displayQty + 1)}
               aria-label="Increase quantity"
             >
               <Plus className="h-3 w-3" />
@@ -81,8 +91,8 @@ export function CartItemRow({ item, onUpdateQuantity, onRemove }: CartItemRowPro
 
           {/* Price */}
           <div className="text-right">
-            <p className="font-medium">${(product.price * quantity).toLocaleString()}</p>
-            {quantity > 1 && <p className="text-xs text-muted-foreground">${product.price.toLocaleString()} each</p>}
+            <p className="font-medium">${(product.price * displayQty).toLocaleString()}</p>
+            {displayQty > 1 && <p className="text-xs text-muted-foreground">${product.price.toLocaleString()} each</p>}
           </div>
         </div>
       </div>

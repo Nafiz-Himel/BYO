@@ -1,27 +1,46 @@
+import { Suspense } from "react"
+import type { Metadata } from "next"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { HeroCarousel } from "@/components/hero-carousel"
 import { FeaturedProducts } from "@/components/featured-products"
-import { collections, products } from "@/lib/mock-data"
-import Link from "next/link"
+import { ProductGridSkeleton } from "@/components/product-skeleton"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
+import Link from "next/link"
+import { getFeaturedProducts, getCollections } from "@/lib/db"
+import { NewsletterForm } from "@/components/newsletter-form"
+
+export const metadata: Metadata = {
+  title: "AETHER | Luxury Clothing",
+  description: "Discover timeless elegance with AETHER - Premium luxury clothing for the modern connoisseur.",
+  openGraph: {
+    title: "AETHER | Luxury Clothing",
+    description: "Discover timeless elegance with AETHER - Premium luxury clothing for the modern connoisseur.",
+    siteName: "AETHER",
+    type: "website",
+  },
+}
+
+async function FeaturedProductsSection() {
+  const products = await getFeaturedProducts(6)
+  return <FeaturedProducts products={products} />
+}
 
 export default function HomePage() {
-  const featuredProducts = products.filter((p) => p.featured).slice(0, 6)
-
   return (
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
 
       <main className="flex-1">
-        {/* Hero Carousel */}
-        <HeroCarousel collections={collections} />
+        <Suspense fallback={<div className="h-[70vh] lg:h-[85vh] bg-muted animate-pulse" />}>
+          <CollectionsCarousel />
+        </Suspense>
 
-        {/* Featured Products */}
-        <FeaturedProducts products={featuredProducts} />
+        <Suspense fallback={<ProductGridSkeleton count={6} />}>
+          <FeaturedProductsSection />
+        </Suspense>
 
-        {/* Brand Statement Section */}
         <section className="py-16 lg:py-24 px-6 lg:px-10 bg-card">
           <div className="container mx-auto max-w-4xl text-center">
             <p className="text-xs tracking-[0.3em] text-muted-foreground uppercase mb-6">Our Philosophy</p>
@@ -38,7 +57,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Newsletter Section */}
         <section className="py-16 lg:py-24 px-6 lg:px-10">
           <div className="container mx-auto max-w-xl text-center">
             <p className="text-xs tracking-[0.3em] text-muted-foreground uppercase mb-4">Stay Connected</p>
@@ -46,20 +64,7 @@ export default function HomePage() {
             <p className="text-muted-foreground text-sm mb-8">
               Be the first to discover new arrivals, exclusive offers, and behind-the-scenes stories from our ateliers.
             </p>
-            <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 h-12 px-4 rounded-lg bg-card border border-border text-sm focus:outline-none focus:ring-2 focus:ring-accent"
-                aria-label="Email address for newsletter"
-              />
-              <Button
-                type="submit"
-                className="h-12 px-8 rounded-lg bg-accent text-accent-foreground hover:bg-accent/90 tracking-widest text-xs"
-              >
-                SUBSCRIBE
-              </Button>
-            </form>
+            <NewsletterForm />
           </div>
         </section>
       </main>
@@ -67,4 +72,9 @@ export default function HomePage() {
       <SiteFooter />
     </div>
   )
+}
+
+async function CollectionsCarousel() {
+  const collections = await getCollections()
+  return <HeroCarousel collections={collections} />
 }

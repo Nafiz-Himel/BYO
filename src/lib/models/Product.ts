@@ -13,6 +13,6 @@ const ProductSchema = new Schema({
   details: { type: String },
   sizingGuide: { type: String },
   shipping: { type: String },
-}, { timestamps: true })
+}, { timestamps: true, suppressReservedKeysWarning: true })
 
 export const Product = mongoose.models.Product || mongoose.model("Product", ProductSchema)

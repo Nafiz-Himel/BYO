@@ -15,7 +15,7 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <Card className="group border-0 bg-transparent shadow-none">
       <CardContent className="p-0">
-        <Link href={`/shop/${product.slug}`} className="block">
+        <Link href={`/products/${product.slug}`} className="block">
           <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-muted">
             <Image
               src={product.images[0] || "/placeholder.svg"}
@@ -38,7 +38,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </Link>
         <div className="mt-4 space-y-2">
           <div className="flex items-start justify-between gap-2">
-            <Link href={`/shop/${product.slug}`}>
+            <Link href={`/products/${product.slug}`}>
               <h3 className="font-medium text-sm tracking-wide hover:text-accent transition-colors line-clamp-1">
                 {product.name}
               </h3>
@@ -52,7 +52,7 @@ export function ProductCard({ product }: ProductCardProps) {
               </span>
             )}
           </div>
-          <Link href={`/shop/${product.slug}`} className="block pt-2">
+          <Link href={`/products/${product.slug}`} className="block pt-2">
             <Button variant="outline" size="sm" className="w-full rounded-lg tracking-wider text-xs bg-transparent">
               VIEW PRODUCT
             </Button>

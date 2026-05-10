@@ -11,7 +11,15 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command"
-import { products } from "@/lib/mock-data"
+
+interface SearchResult {
+  id: string
+  name: string
+  slug: string
+  price: number
+  category: string
+  images: string[]
+}
 
 interface CommandSearchProps {
   open: boolean
@@ -20,6 +28,9 @@ interface CommandSearchProps {
 
 export function CommandSearch({ open, onOpenChange }: CommandSearchProps) {
   const router = useRouter()
+  const [query, setQuery] = React.useState("")
+  const [results, setResults] = React.useState<SearchResult[]>([])
+  const [loading, setLoading] = React.useState(false)
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -33,18 +44,42 @@ export function CommandSearch({ open, onOpenChange }: CommandSearchProps) {
     return () => document.removeEventListener("keydown", down)
   }, [open, onOpenChange])
 
+  React.useEffect(() => {
+    if (!query.trim()) {
+      setResults([])
+      return
+    }
+
+    const timer = setTimeout(async () => {
+      setLoading(true)
+      try {
+        const res = await fetch(`/api/products/search?q=${encodeURIComponent(query)}`)
+        const data = await res.json()
+        setResults(data.products || [])
+      } catch {
+        setResults([])
+      } finally {
+        setLoading(false)
+      }
+    }, 300)
+
+    return () => clearTimeout(timer)
+  }, [query])
+
   const handleSelect = (slug: string) => {
     onOpenChange(false)
-    router.push(`/shop/${slug}`)
+    router.push(`/products/${slug}`)
   }
 
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
-      <CommandInput placeholder="Search products..." />
+      <CommandInput placeholder="Search products..." value={query} onValueChange={setQuery} />
       <CommandList>
-        <CommandEmpty>No products found.</CommandEmpty>
+        <CommandEmpty>
+          {loading ? "Searching..." : query ? "No products found." : "Type to search products..."}
+        </CommandEmpty>
         <CommandGroup heading="Products">
-          {products.map((product) => (
+          {results.map((product) => (
             <CommandItem
               key={product.id}
               value={product.name}

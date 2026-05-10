@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react"
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react"
 import type { Product } from "./mock-data"
 
 export interface CartItem {
@@ -21,15 +21,54 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
+const STORAGE_KEY = "aether-cart"
+
+function loadCart(): CartItem[] {
+  if (typeof window === "undefined") return []
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY)
+    if (stored) {
+      return JSON.parse(stored)
+    }
+  } catch {
+    console.warn("Failed to load cart from localStorage")
+  }
+  return []
+}
+
+function saveCart(items: CartItem[]) {
+  if (typeof window === "undefined") return
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
+  } catch {
+    console.warn("Failed to save cart to localStorage")
+  }
+}
+
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
+  const [hydrated, setHydrated] = useState(false)
+
+  useEffect(() => {
+    setItems(loadCart())
+    setHydrated(true)
+  }, [])
+
+  useEffect(() => {
+    if (hydrated) {
+      saveCart(items)
+    }
+  }, [items, hydrated])
 
   const addItem = useCallback((product: Product, quantity: number, size: string) => {
     setItems((prev) => {
       const existingIndex = prev.findIndex((item) => item.product.id === product.id && item.size === size)
       if (existingIndex > -1) {
         const updated = [...prev]
-        updated[existingIndex].quantity += quantity
+        updated[existingIndex] = {
+          ...updated[existingIndex],
+          quantity: updated[existingIndex].quantity + quantity,
+        }
         return updated
       }
       return [...prev, { product, quantity, size }]
@@ -47,7 +86,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
         return
       }
       setItems((prev) =>
-        prev.map((item) => (item.product.id === productId && item.size === size ? { ...item, quantity } : item)),
+        prev.map((item) =>
+          item.product.id === productId && item.size === size ? { ...item, quantity } : item,
+        ),
       )
     },
     [removeItem],
