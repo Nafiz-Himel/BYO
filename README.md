@@ -2,13 +2,39 @@
 
 **Modern E-commerce Platform for Premium Fashion**
 
-![AETHER](https://byo-lyart.vercel.app/og-image.png) 
-
 **Live Demo:** [byo-lyart.vercel.app](https://byo-lyart.vercel.app/)
 
-## 🌟 Overview
+<div align="center">
+  <h1>AETHER — Luxury Clothing ✨</h1>
+  
+  <p><strong>Modern & Elegant E-commerce Experience for Premium Fashion</strong></p>
 
-**AETHER** is a sleek, high-end luxury clothing e-commerce website built with **Next.js 15 (App Router)**. It delivers a premium shopping experience with elegant design, smooth animations, dark/light mode, and a powerful command palette — inspired by contemporary luxury fashion brands.
+  <a href="https://byo-lyart.vercel.app/" target="_blank">
+    <img src="https://img.shields.io/badge/Live%20Demo-Visit%20Now-black?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" />
+  </a>
+</div>
+
+<br>
+
+![AETHER Banner](https://byo-lyart.vercel.app/og-image.png) <!-- যদি banner থাকে -->
+
+## About This Project
+
+**AETHER** is a beautifully crafted luxury clothing e-commerce platform. It features a premium, minimalist design with smooth animations, dark/light mode, command palette, and an exceptional user experience — inspired by high-end fashion brands.
+
+Built with modern web technologies to deliver fast performance and visual elegance.
+
+---
+
+### 🛠️ Tech Stack
+
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer%20Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+
+---
 
 ## ✨ Features
 
@@ -19,16 +45,6 @@
 - **Optimized Performance** — Built with Next.js 15, TypeScript & Tailwind CSS
 - **SEO Friendly** — Metadata, Open Graph, and structured data ready
 - **Fast & Smooth UX** — Framer Motion animations + optimized images
-
-## 🛠️ Tech Stack
-
-- **Framework:** Next.js 15 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **UI Components:** Custom + shadcn/ui
-- **Font:** Geist (Vercel)
-- **Deployment:** Vercel
-- **Package Manager:** pnpm
 
 📁 Project Structure
 ```
