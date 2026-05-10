@@ -58,13 +58,55 @@ This project showcases clean architecture, proper data fetching strategies, and 
 📁 Project Structure
 ```
 BYO/
+├── public/                     # Static assets (images, icons, etc.)
 ├── src/
-│   ├── app/              # App Router pages & layouts
-│   ├── components/       # Reusable UI components
-│   └── lib/              # Utilities & data
-├── public/               # Static assets
-├── styles/               # Global styles
-└── components.json       # shadcn/ui config
+│   ├── app/                    # Next.js App Router
+│   │   ├── api/
+│   │   │   └── products/
+│   │   │       └── search/     # Search API route (only one)
+│   │   ├── cart/               # Cart page
+│   │   ├── create-product/     # Admin - Create Product Page
+│   │   ├── products/           # Product listing + dynamic [slug]
+│   │   ├── shop/               # Shop page with filters
+│   │   ├── error.tsx
+│   │   ├── globals.css
+│   │   ├── layout.tsx          # Root layout
+│   │   ├── loading.tsx         # Global loading
+│   │   ├── not-found.tsx
+│   │   └── page.tsx            # Homepage
+│   │
+│   ├── components/             # All reusable components
+│   │   ├── ui/                 # shadcn/ui components
+│   │   ├── product-card.tsx
+│   │   ├── product-gallery.tsx
+│   │   ├── shop-filters.tsx
+│   │   ├── shop-pagination.tsx
+│   │   ├── mode-toggle.tsx
+│   │   ├── newsletter-form.tsx
+│   │   ├── command-search.tsx
+│   │   ├── hero-carousel.tsx
+│   │   └── ... (many more)
+│   │
+│   ├── hooks/                  # Custom React hooks
+│   │
+│   └── lib/
+│       ├── actions/            # Server Actions
+│       ├── models/             # Mongoose Models (Product, Category, Newsletter)
+│       ├── db.ts
+│       ├── mongodb.ts
+│       ├── utils.ts
+│       ├── cart-context.tsx
+│       ├── seed.ts
+│       └── mock-data.ts
+│
+├── styles/                     # Additional styles (if needed)
+├── .gitignore
+├── components.json             # shadcn/ui config
+├── next.config.ts
+├── package.json
+├── pnpm-lock.yaml
+├── tsconfig.json
+└── README.md
 ```
 
 
