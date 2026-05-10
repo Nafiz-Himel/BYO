@@ -22,6 +22,8 @@ export const metadata: Metadata = {
   },
 }
 
+export const dynamic = "force-dynamic"
+
 async function FeaturedProductsSection() {
   const products = await getFeaturedProducts(6)
   return <FeaturedProducts products={products} />
