@@ -25,8 +25,8 @@ export function SiteHeader() {
                 <span className="sr-only">Open menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-              <nav className="flex flex-col gap-6 mt-10">
+            <SheetContent side="left" className="w-[280px] sm:w-[400px]">
+              <nav className="flex flex-col gap-6 mt-10 pl-6 sm:pl-0">
                 <Link href="/" className="text-lg font-medium tracking-wide hover:text-accent transition-colors">
                   Home
                 </Link>
@@ -78,12 +78,12 @@ export function SiteHeader() {
           </nav>
 
           {/* Logo */}
-          <Link href="/" className="absolute left-1/2 -translate-x-1/2 font-serif text-2xl tracking-[0.3em] font-light">
+          <Link href="/" className="absolute left-1/2 -translate-x-1/2 font-serif text-lg lg:text-2xl tracking-[0.3em] font-light">
             AETHER
           </Link>
 
           {/* Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-0.5 lg:gap-2 -mr-3 lg:mr-0">
             <Button
               variant="ghost"
               size="icon"
