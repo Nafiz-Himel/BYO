@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+
 import { CreateProductForm } from "@/components/create-product-form"
 
 export const metadata: Metadata = {
@@ -10,9 +9,8 @@ export const metadata: Metadata = {
 
 export default function CreateProductPage() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <SiteHeader />
-      <main className="flex-1 py-16 px-6 lg:px-10">
+    <>
+      <div className="flex-1 py-16 px-6 lg:px-10">
         <div className="container mx-auto max-w-2xl">
           <div className="text-center mb-12">
             <p className="text-xs tracking-[0.3em] text-muted-foreground uppercase mb-4">Admin</p>
@@ -20,8 +18,7 @@ export default function CreateProductPage() {
           </div>
           <CreateProductForm />
         </div>
-      </main>
-      <SiteFooter />
-    </div>
+      </div>
+    </>
   )
 }

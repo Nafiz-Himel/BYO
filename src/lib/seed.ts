@@ -95,7 +95,7 @@ const products = [
     category: "shirts",
     sizes: ["S", "M", "L", "XL"],
     images: ["/luxury-linen-shirt-white-minimal.jpg"],
-    featured: false,
+    featured: true,
     isNew: false,
   },
   {

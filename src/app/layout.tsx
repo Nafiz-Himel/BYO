@@ -5,6 +5,8 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { CartProvider } from "@/lib/cart-context"
+import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
 
 const _geistSans = Geist({ subsets: ["latin"], variable: "--font-sans" })
 const _geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
@@ -54,7 +56,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`font-sans antialiased ${_geistSans.variable} ${_geistMono.variable} ${_playfair.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <CartProvider>{children}</CartProvider>
+          <CartProvider>
+            <div className="min-h-screen flex flex-col">
+              <SiteHeader />
+              <main className="flex-1 lg:pt-16">{children}</main>
+              <SiteFooter />
+            </div>
+          </CartProvider>
         </ThemeProvider>
         <Analytics />
       </body>
